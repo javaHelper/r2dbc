@@ -17,7 +17,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 
-@Service
+//@Service
 public class DataSetupService implements CommandLineRunner {
 
 	@Value("classpath:init.sql")
@@ -33,7 +33,7 @@ public class DataSetupService implements CommandLineRunner {
 			.getDatabaseClient()
 			.sql(query)
 			.then()
-			.then(insertProduct())
+			//.then(insertProduct())
 			.subscribe();
 	}
 

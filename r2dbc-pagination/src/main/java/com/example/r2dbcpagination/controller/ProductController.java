@@ -24,4 +24,10 @@ public class ProductController {
 	public Mono<Page<Product>> getAll(@RequestParam("page") int page, @RequestParam("size") int size){
 		return this.productService.getProducts(PageRequest.of(page, size));
 	}
+	
+	
+	@GetMapping("pagenation")
+	public Mono<Page<Product>> getDataByPagination(@RequestParam("page") int page, @RequestParam("size") int size){
+		return this.productService.getAllProducts(page, size);
+	}
 }

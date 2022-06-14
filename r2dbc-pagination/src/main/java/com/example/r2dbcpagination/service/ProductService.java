@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +25,14 @@ public class ProductService {
 				.collectList()
 				.zipWith(this.productRepository.count())
 				.map(t -> new PageImpl<>(t.getT1(), pageRequest, t.getT2()));
+	}
+	
+	public Mono<Page<Product>> getAllProducts(int page, int size){
+		Pageable pageable = PageRequest.of(page, size, Sort.by("price").ascending());
+		
+		return this.productRepository.findAllBy(pageable)
+				.collectList()
+				.zipWith(this.productRepository.count())
+				.map(t -> new PageImpl<>(t.getT1(), pageable, t.getT2()));
 	}
 }
