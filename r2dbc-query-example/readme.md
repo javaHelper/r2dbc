@@ -164,3 +164,19 @@ GET -> `http://localhost:8080/customer/searchForNull?firstName=null`
     }
 ]
 ```
+GET -> `http://localhost:8080/customer/search?country=BR`
+
+Response:
+
+```json
+[
+    {
+        "id": 1,
+        "firstName": "Tara",
+        "lastName": "Wheeliker",
+        "email": "twheeliker0@storify.com",
+        "country": "Brazil",
+        "isActive": false
+    }
+]
+```
