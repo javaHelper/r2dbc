@@ -37,3 +37,18 @@ Response:
     }
 ]
 ```
+
+GET -> `http://localhost:8080/customer/insensativeSearch?firstName=dela&lastName=dacks`
+
+```json
+[
+    {
+        "id": 5,
+        "firstName": "Dela",
+        "lastName": "Dacks",
+        "email": "ddacks4@hao123.com",
+        "country": "China",
+        "isActive": false
+    }
+]
+```
