@@ -36,4 +36,26 @@ public class CustomerQueryService {
     public Flux<Customer> insensitiveSearchForSpecificField(Customer customer){
         return this.repository.findAll(Example.of(customer, ExampleMatcher.matching().withIgnoreCase("lastName")));
     }
+    
+    
+    public Flux<Customer> matchingAny(Customer customer){
+    	return this.repository.findAll(Example.of(customer, ExampleMatcher.matchingAny().withIgnoreCase()));
+    }
+    
+    public Flux<Customer> searchEndsWith(Customer customer){
+        ExampleMatcher exampleObjectMatcher = ExampleMatcher.matching()
+                .withMatcher("email", ExampleMatcher.GenericPropertyMatchers.endsWith());
+        
+        return this.repository.findAll(Example.of(customer, exampleObjectMatcher));
+    }
+    
+    public Flux<Customer> searchForNull(Customer customer){
+        return this.repository.findAll(Example.of(customer, ExampleMatcher.matching().withIncludeNullValues()));
+    }
+    
+    public Flux<Customer> searchByProperty(Customer customer){
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withTransformer("country", op -> op.map(c -> countryMap.getOrDefault(c, "UNKNOWN")));
+        return this.repository.findAll(Example.of(customer, matcher));
+    }
 }
